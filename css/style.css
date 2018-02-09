@@ -1,0 +1,241 @@
+/* FONT FACE */
+/* Appelle les polices de la page */
+
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans|Encode+Sans+Condensed|Encode+Sans+Expanded');
+
+/* font-family: 'Encode Sans Expanded', sans-serif; */
+/* font-family: 'Encode Sans', sans-serif; */
+/* font-family: 'Encode Sans Condensed', sans-serif; */
+a, p, h1, h2, h3{
+  font-family: 'Encode Sans Expanded', sans-serif;
+  color: #fff;
+}
+/*GLOBAL */
+/* Balises et class appelés à plusieurs endroits dans la page */
+body{
+  background-image: linear-gradient(90deg, #010289 0%, #1D30D6 100%);
+
+}
+
+header, main, footer{
+  max-width: 990px;
+  margin: 0 auto;
+}
+/* HEADER */
+/* Ce qui concerne le header et la nav */
+
+/*Menu*/
+nav{
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+nav a:first-child{
+  background-color: #030561;
+  padding: 10px 30px;
+}
+
+ .st0{fill:#233240;}
+    .st1{fill:#D64541;}
+    .st2{fill:#FAFAFA;}
+
+@-webkit-keyframes fadein {
+  0%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fadein {
+   0%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fadein {
+   0%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fadein {
+    0%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes frontcolor {
+  0%, 50% { fill:#FFFFFF; }
+  100% { fill:#D64541; }
+}
+@-moz-keyframes frontcolor {
+  0%, 50% { fill:#FFFFFF; }
+  100% { fill:#D64541; }
+}
+@-o-keyframes frontcolor {
+  0%, 50% { fill:#FFFFFF; }
+  100% { fill:#D64541; }
+}
+@keyframes frontcolor {
+  0%, 50% { fill:#FFFFFF; }
+  100% { fill:#D64541; }
+}
+
+
+@-webkit-keyframes backspin {
+  from {
+    -webkit-transform: rotate(180deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes backspin {
+  from {
+    -moz-transform: rotate(180deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes backspin {
+  from {
+    -o-transform: rotate(180deg);
+  }
+  to {
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes backspin {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#ditback{
+    animation: backspin 1s;
+    -moz-animation: backspin 1s; /* Firefox */
+    -webkit-animation: backspin 1s; /* Safari et Chrome */
+    -o-animation: backspin 1s; /* Opera */
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+#ditback2:h{
+    animation: backspin 1s;
+    -moz-animation: backspin 1s; /* Firefox */
+    -webkit-animation: backspin 1s; /* Safari et Chrome */
+    -o-animation: backspin 1s; /* Opera */
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+nav a{
+  font-size: 24 em;
+}
+
+nav input[type="search"] {
+  border-radius: 25px;
+  border: 0;
+  background-color: #030561;
+  padding: 10px 0 10px 20px;
+  margin-left: 30px;
+  color: #fff;
+  text-transform: uppercase;
+}
+@media (max-width: 500px) {
+  nav{
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+
+  }
+
+  nav a:first-child{
+    background-color: #030561;
+    padding: 10px 30px;
+  }
+  input[type="search"]{
+    display: n
+  }
+
+}
+/* MAIN */
+/* Ce qui concerne le corps du site */
+
+main{
+  max-width: 990px;
+  margin: 0 auto;
+}
+
+video{
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+  position:relative;
+  top: 0;
+  right: 0;
+  bottom:0;
+  left: 0;
+}
+#textvideo{
+  position:relative;
+  z-index: 0;
+}
+
+section h1{
+  margin-top: 150px
+  font-size: 1em;
+}
+section p{
+  font-size: 0.7em;
+}
+
+section{
+  display: flex;
+  justify-content: center;
+}
+
+section:first-child{
+  display: block;
+  margin-bottom: -10px;
+}
+
+section article:nth-child(1){
+  /* Rectangle 1 Copy: */
+  background-image: linear-gradient(-123deg, #000023 0%, #070745 100%);
+  width: 60%;
+  padding: 0 25px;
+}
+input[type="button"]{
+  background-image: linear-gradient(-123deg, #0189FF 1%, #2D3ED6 100%);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+  border-radius: 100px;
+  border: 0;
+  padding: 15px 20px;
+  color: #fff;
+}
+section article:nth-child(2){
+  /* Rectangle 1: */
+  background-image: linear-gradient(-123deg, #010289 0%, #1D30D6 100%);
+  text-align: center;
+  width: 40%;
+  padding: 25px;
+}
+
+section article:nth-child(2) img{
+ width: 60%;
+ border-radius: 1px solid #fff;
+}
+
+section article:nth-child(3){
+
+}
+
+
+
+
+/* FOOTER */
+/* Ce qui concerne le footer */
