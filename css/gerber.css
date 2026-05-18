@@ -1,0 +1,83 @@
+/* GERBER Events — shared base styles for all directions */
+
+/* Kanilia — brand display face */
+@font-face {
+  font-family: "Kanilia";
+  src: url("../assets/Kanilia-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reset within direction roots — avoid bleeding outside the artboard */
+.ge-root,
+.ge-root * { box-sizing: border-box; }
+.ge-root { 
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  --ge-ease: cubic-bezier(.2,.7,.2,1);
+}
+
+/* placeholder stripe pattern */
+.ge-ph {
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.045) 0 1px,
+      transparent 1px 12px
+    ),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  color: rgba(255,255,255,.45);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 12px;
+}
+.ge-root[data-mode="light"] .ge-ph {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(0,0,0,.045) 0 1px,
+      transparent 1px 12px
+    ),
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+  color: rgba(0,0,0,.45);
+}
+
+/* tabular nums where used */
+.ge-num { font-variant-numeric: tabular-nums; }
+
+/* fade in helper */
+@keyframes ge-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ge-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ge-mask-in {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes ge-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* small scroll hint */
+.ge-scroll-hint {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .6;
+}
