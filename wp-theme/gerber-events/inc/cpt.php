@@ -125,16 +125,22 @@ function ge_save_meta($post_id) {
     if (!current_user_can('edit_post', $post_id)) return;
 
     // Discipline
-    if (isset($_POST['ge_discipline_meta_nonce']) && wp_verify_nonce($_POST['ge_discipline_meta_nonce'], 'ge_discipline_meta')) {
-        foreach (['roman_number','tags','caption','kicker'] as $k) {
-            if (isset($_POST[$k])) update_post_meta($post_id, $k, sanitize_text_field(wp_unslash($_POST[$k])));
+    if (isset($_POST['ge_discipline_meta_nonce'])) {
+        if (!wp_verify_nonce($_POST['ge_discipline_meta_nonce'], 'ge_discipline_meta')) return;
+        foreach (['roman_number', 'tags', 'caption', 'kicker'] as $k) {
+            if (isset($_POST[$k])) {
+                update_post_meta($post_id, $k, sanitize_text_field(wp_unslash($_POST[$k])));
+            }
         }
     }
 
     // Still
-    if (isset($_POST['ge_still_meta_nonce']) && wp_verify_nonce($_POST['ge_still_meta_nonce'], 'ge_still_meta')) {
-        foreach (['label','code'] as $k) {
-            if (isset($_POST[$k])) update_post_meta($post_id, $k, sanitize_text_field(wp_unslash($_POST[$k])));
+    if (isset($_POST['ge_still_meta_nonce'])) {
+        if (!wp_verify_nonce($_POST['ge_still_meta_nonce'], 'ge_still_meta')) return;
+        foreach (['label', 'code'] as $k) {
+            if (isset($_POST[$k])) {
+                update_post_meta($post_id, $k, sanitize_text_field(wp_unslash($_POST[$k])));
+            }
         }
     }
 }

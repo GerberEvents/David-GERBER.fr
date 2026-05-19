@@ -171,11 +171,13 @@ function CursorDot({ C, mouse, af, mono }) {
 }
 
 function NavBar({ C, mono, script, display, fade, D }) {
-  const nav   = (D.nav  && D.nav.length)  ? D.nav  : [
+  const nav  = (D.nav && D.nav.length) ? D.nav : [
     { label:'Atelier', href:'#' }, { label:'Productions', href:'#' },
     { label:'Méthode', href:'#' }, { label:'Presse', href:'#' }, { label:'Contact', href:'#contact' }
   ];
-  const home  = (D.site && D.site.home) ? D.site.home : '#';
+  const home = (D.site && D.site.home) ? D.site.home : '#';
+  const [navHover, setNavHover] = useState(null);
+
   return (
     <header style={{
       position:'relative', zIndex:8,
@@ -198,9 +200,9 @@ function NavBar({ C, mono, script, display, fade, D }) {
       }}>
         {nav.map((it) =>
           <a key={it.label} href={it.href || '#'}
-            style={{ color:'inherit', textDecoration:'none', transition:'color .2s' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = C.fg}
-            onMouseLeave={(e) => e.currentTarget.style.color = C.fgMute}>
+            style={{ color: navHover === it.label ? C.fg : C.fgMute, textDecoration:'none', transition:'color .2s' }}
+            onMouseEnter={() => setNavHover(it.label)}
+            onMouseLeave={() => setNavHover(null)}>
             {it.label}
           </a>
         )}
@@ -432,7 +434,7 @@ function FilmFrame({ s, i, seen, C, mono, af }) {
         transition: `opacity ${0.5*(af||0.01)}s ${i*0.07*(af||0.01)}s var(--ge-ease),
                      transform ${0.5*(af||0.01)}s ${i*0.07*(af||0.01)}s var(--ge-ease)`
       }}>
-      {s.src && <img src={s.src} alt={s.label || ''} style={{
+      {s.src && <img src={s.src} alt={s.label || ''} loading="lazy" style={{
         position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover',
         filter: hover ? 'grayscale(1) contrast(1.05) brightness(1)' : 'grayscale(1) contrast(.95) brightness(.7)',
         transform: hover ? 'scale(1.04)' : 'scale(1)',
@@ -618,7 +620,7 @@ function DisciplineRow({ s, i, seen, active, anyActive, onEnter, C, display, bod
         transform: active ? 'scale(1.04)' : 'scale(1)',
         transition:`transform ${0.4*aff}s var(--ge-ease)`
       }}>
-        {s.img && <img src={s.img} alt={s.title || ''} style={{
+        {s.img && <img src={s.img} alt={s.title || ''} loading="lazy" style={{
           width:'100%', height:'100%', objectFit:'cover',
           filter: active ? 'grayscale(1) brightness(1) contrast(1.05)' : 'grayscale(1) brightness(.65) contrast(1)',
           transition:`filter ${0.3*aff}s var(--ge-ease)`
@@ -644,8 +646,8 @@ function DisciplineRow({ s, i, seen, active, anyActive, onEnter, C, display, bod
       </div>
 
       <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
-        {(s.tags||[]).map((tag) =>
-          <span key={tag} style={{
+        {(s.tags||[]).map((tag, ti) =>
+          <span key={`${tag}-${ti}`} style={{
             fontFamily:mono, fontSize:10.5, letterSpacing:'.08em', textTransform:'uppercase',
             padding:'4px 10px', border:`1px solid ${active ? C.ruleStrong : C.rule}`,
             borderRadius:999, color: active ? C.fg : C.fgMute,
