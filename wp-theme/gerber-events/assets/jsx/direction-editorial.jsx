@@ -308,10 +308,7 @@ function HeroSidebar({ C, display, body, script, mono, af, mouse, D }) {
         fontFamily:display, fontStyle:'italic', fontWeight:400,
         fontSize:'clamp(26px,2.4vw,38px)', lineHeight:1.15, letterSpacing:'-0.01em', color:C.fg
       }}>
-        "{quote.replace(/\.$/, '')},&nbsp;
-        <span style={{ fontStyle:'italic', textDecoration:'underline', textDecorationThickness:1, textUnderlineOffset:6 }}>
-          {quote.split(',').pop().trim()}"
-        </span>
+        "{quote}"
       </div>
 
       <div style={{ position:'relative' }}>
@@ -319,8 +316,7 @@ function HeroSidebar({ C, display, body, script, mono, af, mouse, D }) {
           fontFamily:script, fontSize:'clamp(44px,4.6vw,76px)', lineHeight:1.05, color:C.fg,
           textShadow: C.bg==='#0a0a0a' ? '0 2px 12px rgba(0,0,0,.4)' : 'none'
         }}>
-          {scriptTxt.replace('mindset.', '')}
-          <span style={{ display:'inline-block', transform:'rotate(-2deg)' }}>mindset.</span>
+          <span style={{ display:'inline-block', transform:'rotate(-2deg)' }}>{scriptTxt}</span>
         </div>
         <div style={{
           fontFamily:mono, fontSize:10.5, letterSpacing:'.22em', textTransform:'uppercase',
@@ -509,8 +505,7 @@ function Manifesto({ C, dt, af, display, script, mono, D }) {
         <div style={{ width:'min(420px,60%)', height:1, background:C.rule, margin:'8px auto 0' }} />
 
         <div style={{ fontFamily:script, fontSize:'clamp(36px,4vw,64px)', lineHeight:1.1, color:C.fg, paddingTop:8 }}>
-          {scr.replace('mindset.','')}
-          <span style={{ display:'inline-block', transform:'rotate(-2deg)' }}>mindset.</span>
+          <span style={{ display:'inline-block', transform:'rotate(-2deg)' }}>{scr}</span>
         </div>
 
         <div style={{ fontFamily:mono, fontSize:10.5, letterSpacing:'.22em', textTransform:'uppercase', color:C.fgFaint, marginTop:12 }}>
@@ -568,8 +563,7 @@ function Disciplines({ C, dt, af, display, body, script, mono, D }) {
           {eyebrow}
         </div>
         <h2 style={{ margin:0, fontFamily:display, fontWeight:400, fontSize:'clamp(34px,4.4vw,64px)', lineHeight:1.04, letterSpacing:'-0.02em', color:C.fg, maxWidth:880 }}>
-          {title.split('—')[0]}—<span style={{ fontStyle:'italic' }}>{title.split('—')[1] && title.split('—')[1].split('pensés')[0]}</span>
-          {title.includes('pensés') && 'pensés' + title.split('pensés')[1]}
+          {title}
         </h2>
         <div style={{ fontFamily:mono, fontSize:10.5, letterSpacing:'.18em', textTransform:'uppercase', color:C.fgFaint, textAlign:'right', lineHeight:1.7 }}>
           IV / IV<br />
@@ -699,8 +693,7 @@ function ContactStrip({ C, dt, mono, script, display, D }) {
           <div style={{ fontFamily:display, fontWeight:400, fontSize:'clamp(48px,6vw,96px)', lineHeight:0.92, letterSpacing:'-0.025em', color:C.fg }}>
             Brief direct.
             <div style={{ fontFamily:script, fontSize:'0.6em', lineHeight:.9, marginTop:12, color:C.fg }}>
-              {scr.replace('welcome.', '')}
-              <span style={{ transform:'rotate(-2deg)', display:'inline-block' }}>welcome.</span>
+              <span style={{ transform:'rotate(-2deg)', display:'inline-block' }}>{scr}</span>
             </div>
           </div>
         </div>

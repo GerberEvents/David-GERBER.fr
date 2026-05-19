@@ -37,7 +37,8 @@ function ge_enqueue_assets() {
     wp_enqueue_script('ge-babel');
 
     // Inject window.GERBER_DATA before the JSX runs.
-    wp_register_script('ge-data', '', [], $ver, false);
+    // false src = handle virtuel pour script inline uniquement.
+    wp_register_script('ge-data', false, [], $ver, false);
     wp_enqueue_script('ge-data');
     wp_add_inline_script('ge-data',
         'window.GERBER_DATA = ' . wp_json_encode(ge_collect_data()) . ';',
@@ -74,7 +75,7 @@ function ge_babel_script_type($tag, $handle, $src) {
     // Replace `src=` with `data-presets="..."` + `type="text/babel"`.
     $tag = str_replace(
         ' src=',
-        ' type="text/babel" data-presets="env,react" data-type="module" src=',
+        ' type="text/babel" data-presets="react" src=',
         $tag
     );
     return $tag;
