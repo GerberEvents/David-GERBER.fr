@@ -94,7 +94,9 @@ function ge_get_disciplines() {
         }
         wp_reset_postdata();
     }
-    return $out ?: ge_default_disciplines();
+    if ($out) return $out;
+    // Fallback : retire _local_img (clé interne, inutile côté JS).
+    return array_map(fn($d) => array_diff_key($d, ['_local_img' => '']), ge_default_disciplines());
 }
 
 function ge_get_stills() {
@@ -117,7 +119,8 @@ function ge_get_stills() {
         }
         wp_reset_postdata();
     }
-    return $out ?: ge_default_stills();
+    if ($out) return $out;
+    return array_map(fn($s) => array_diff_key($s, ['_local_img' => '']), ge_default_stills());
 }
 
 /**
@@ -146,55 +149,59 @@ function ge_get_nav_items($location) {
 // ── Defaults — used by the seeder and as a runtime fallback ─────────────
 
 function ge_default_disciplines() {
-    $img = get_template_directory_uri() . '/assets/img/';
+    $uri = get_template_directory_uri() . '/assets/img/';
     return [
         [
-            'n'       => 'I',
-            'title'   => 'Conception · UX / UI Design',
-            'blurb'   => "Aménagement d'espaces, création 3D, design d'interface et expérience utilisateur — du pré-prod à la régie graphique en plateau.",
-            'tags'    => ['UX', 'UI', '3D', 'Espaces'],
-            'img'     => $img . 'portrait-sound-engineer.png',
-            'caption' => 'Régie · session 2024',
-            'kicker'  => 'UX',
+            'n'          => 'I',
+            'title'      => 'Conception · UX / UI Design',
+            'blurb'      => "Aménagement d'espaces, création 3D, design d'interface et expérience utilisateur — du pré-prod à la régie graphique en plateau.",
+            'tags'       => ['UX', 'UI', '3D', 'Espaces'],
+            'img'        => $uri . 'portrait-sound-engineer.png',
+            '_local_img' => 'portrait-sound-engineer.png',
+            'caption'    => 'Régie · session 2024',
+            'kicker'     => 'UX',
         ],
         [
-            'n'       => 'II',
-            'title'   => 'Développement Web · Identité Digitale',
-            'blurb'   => 'Création de sites web, branding, design visuel et solutions digitales sur mesure — pensé pour résister au plateau.',
-            'tags'    => ['Code', 'Brand', 'Visuel', 'Sur-mesure'],
-            'img'     => $img . 'portrait-trumpet.jpeg',
-            'caption' => 'Direction artistique · 2023',
-            'kicker'  => 'BRAND',
+            'n'          => 'II',
+            'title'      => 'Développement Web · Identité Digitale',
+            'blurb'      => 'Création de sites web, branding, design visuel et solutions digitales sur mesure — pensé pour résister au plateau.',
+            'tags'       => ['Code', 'Brand', 'Visuel', 'Sur-mesure'],
+            'img'        => $uri . 'portrait-trumpet.jpeg',
+            '_local_img' => 'portrait-trumpet.jpeg',
+            'caption'    => 'Direction artistique · 2023',
+            'kicker'     => 'BRAND',
         ],
         [
-            'n'       => 'III',
-            'title'   => 'Rénovation · Second Œuvre',
-            'blurb'   => "Électricité, plomberie, finitions, béton ciré et coordination technique de chantier — la matière avant l'image.",
-            'tags'    => ['Chantier', 'Finitions', 'Coordination'],
-            'img'     => $img . 'bg-alley-corner.png',
-            'caption' => 'Chantier · loft Canut',
-            'kicker'  => 'BÂTI',
+            'n'          => 'III',
+            'title'      => 'Rénovation · Second Œuvre',
+            'blurb'      => "Électricité, plomberie, finitions, béton ciré et coordination technique de chantier — la matière avant l'image.",
+            'tags'       => ['Chantier', 'Finitions', 'Coordination'],
+            'img'        => $uri . 'bg-alley-corner.png',
+            '_local_img' => 'bg-alley-corner.png',
+            'caption'    => 'Chantier · loft Canut',
+            'kicker'     => 'BÂTI',
         ],
         [
-            'n'       => 'IV',
-            'title'   => 'Événementiel · Régie générale',
-            'blurb'   => 'Son, lumière, scénographie et accompagnement global — depuis 1983, sur scène et en coulisses.',
-            'tags'    => ['Son', 'Lumière', 'Scéno.', 'Production'],
-            'img'     => $img . 'portrait-motorbike.png',
-            'caption' => 'Tournée · printemps 2025',
-            'kicker'  => 'EVT',
+            'n'          => 'IV',
+            'title'      => 'Événementiel · Régie générale',
+            'blurb'      => 'Son, lumière, scénographie et accompagnement global — depuis 1983, sur scène et en coulisses.',
+            'tags'       => ['Son', 'Lumière', 'Scéno.', 'Production'],
+            'img'        => $uri . 'portrait-motorbike.png',
+            '_local_img' => 'portrait-motorbike.png',
+            'caption'    => 'Tournée · printemps 2025',
+            'kicker'     => 'EVT',
         ],
     ];
 }
 
 function ge_default_stills() {
-    $img = get_template_directory_uri() . '/assets/img/';
+    $uri = get_template_directory_uri() . '/assets/img/';
     return [
-        ['src' => $img . 'portrait-revolver-lockup.jpg', 'label' => 'Casting · Studio 4',     'code' => 'A-014'],
-        ['src' => $img . 'portrait-motorbike.png',       'label' => 'Repérage · Hudson St.',   'code' => 'A-027'],
-        ['src' => $img . 'portrait-trumpet.jpeg',        'label' => 'Session · Trompette',     'code' => 'B-008'],
-        ['src' => $img . 'portrait-sound-engineer.png',  'label' => 'Régie son · Live',        'code' => 'B-019'],
-        ['src' => $img . 'portrait-shadow.png',          'label' => 'Portrait · D. Gerber',    'code' => 'C-003'],
-        ['src' => $img . 'bg-alley-corner.png',          'label' => 'Décor · brique brute',    'code' => 'D-002'],
+        ['src' => $uri . 'portrait-revolver-lockup.jpg', '_local_img' => 'portrait-revolver-lockup.jpg', 'label' => 'Casting · Studio 4',    'code' => 'A-014'],
+        ['src' => $uri . 'portrait-motorbike.png',       '_local_img' => 'portrait-motorbike.png',       'label' => 'Repérage · Hudson St.',  'code' => 'A-027'],
+        ['src' => $uri . 'portrait-trumpet.jpeg',        '_local_img' => 'portrait-trumpet.jpeg',        'label' => 'Session · Trompette',    'code' => 'B-008'],
+        ['src' => $uri . 'portrait-sound-engineer.png',  '_local_img' => 'portrait-sound-engineer.png',  'label' => 'Régie son · Live',       'code' => 'B-019'],
+        ['src' => $uri . 'portrait-shadow.png',          '_local_img' => 'portrait-shadow.png',          'label' => 'Portrait · D. Gerber',   'code' => 'C-003'],
+        ['src' => $uri . 'bg-alley-corner.png',          '_local_img' => 'bg-alley-corner.png',          'label' => 'Décor · brique brute',   'code' => 'D-002'],
     ];
 }
