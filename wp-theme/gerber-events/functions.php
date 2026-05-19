@@ -23,4 +23,5 @@ require_once get_template_directory() . '/inc/cpt.php';
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/data.php';
 require_once get_template_directory() . '/inc/assets.php';
+require_once get_template_directory() . '/inc/wpbakery.php';
 require_once get_template_directory() . '/inc/seed.php';

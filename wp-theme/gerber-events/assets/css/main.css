@@ -97,7 +97,356 @@ html, body {
   opacity: .6;
 }
 
-/* Responsive — stack single column on mobile */
+/* ─────────────────────────────────────────────────────────────────────────
+   NAVBAR SITE (pages non-React)
+   ───────────────────────────────────────────────────────────────────────── */
+
+.ge-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+  padding: 18px clamp(20px, 4vw, 56px);
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(244, 241, 236, 0.10);
+}
+
+.admin-bar .ge-site-header {
+  top: 32px;
+}
+
+.ge-site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #f4f1ec;
+}
+
+.ge-site-logo__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  border: 1px solid #f4f1ec;
+  font-family: "DM Serif Display", serif;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+}
+
+.ge-site-logo__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1;
+}
+
+.ge-site-logo__name {
+  font-family: "Kanilia", "DM Serif Display", serif;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+
+.ge-site-logo__script {
+  font-family: "Allura", cursive;
+  font-size: 14px;
+  color: rgba(244, 241, 236, 0.65);
+  line-height: 1;
+}
+
+.ge-site-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.ge-site-nav__list {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+}
+
+.ge-site-nav__list a {
+  color: rgba(244, 241, 236, 0.60);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ge-site-nav__list a:hover,
+.ge-site-nav__list .current-menu-item > a {
+  color: #f4f1ec;
+}
+
+.ge-site-cta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f4f1ec;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(244, 241, 236, 0.30);
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.ge-site-cta:hover {
+  background: #f4f1ec;
+  color: #0a0a0a;
+  border-color: #f4f1ec;
+}
+
+@media (max-width: 767px) {
+  .ge-site-header {
+    grid-template-columns: 1fr auto;
+  }
+  .ge-site-nav { display: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   TEMPLATES PAGE & SINGLE
+   ───────────────────────────────────────────────────────────────────────── */
+
+.ge-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #f4f1ec;
+}
+
+.ge-page__header {
+  background: #050505;
+  border-bottom: 1px solid rgba(244, 241, 236, 0.12);
+  padding: clamp(48px, 8vh, 96px) clamp(20px, 4vw, 88px) clamp(40px, 6vh, 72px);
+}
+
+.ge-page__header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ge-page__title {
+  margin: 0;
+  font-family: "Kanilia", "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 96px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: #f4f1ec;
+}
+
+.ge-article-meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 236, 0.45);
+  margin-bottom: 20px;
+}
+
+.ge-article-meta a {
+  color: rgba(244, 241, 236, 0.65);
+  text-decoration: none;
+}
+
+.ge-article-meta__sep { margin: 0 8px; }
+
+.ge-article-thumb {
+  margin-top: clamp(24px, 3vh, 40px);
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.ge-article-thumb img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  filter: grayscale(0.3) contrast(1.05);
+  display: block;
+}
+
+.ge-page__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vh, 80px) clamp(20px, 4vw, 88px);
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(244, 241, 236, 0.85);
+}
+
+.ge-page__content h1,
+.ge-page__content h2,
+.ge-page__content h3,
+.ge-page__content h4 {
+  font-family: "Kanilia", "DM Serif Display", serif;
+  font-weight: 400;
+  color: #f4f1ec;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 1.8em 0 0.6em;
+}
+
+.ge-page__content h2 { font-size: clamp(28px, 3.5vw, 52px); }
+.ge-page__content h3 { font-size: clamp(22px, 2.5vw, 36px); }
+.ge-page__content h4 { font-size: clamp(18px, 2vw, 26px); }
+
+.ge-page__content p { margin: 0 0 1.4em; }
+
+.ge-page__content a {
+  color: #f4f1ec;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.ge-page__content a:hover { text-decoration: none; }
+
+.ge-page__content ul,
+.ge-page__content ol {
+  padding-left: 1.5em;
+  margin: 0 0 1.4em;
+}
+
+.ge-page__content li { margin-bottom: 0.4em; }
+
+.ge-page__content blockquote {
+  margin: 2em 0;
+  padding: 1.5em 2em;
+  border-left: 2px solid rgba(244, 241, 236, 0.3);
+  font-style: italic;
+  font-size: 1.15em;
+  color: #f4f1ec;
+}
+
+.ge-page__content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(0.2);
+}
+
+.ge-page__content hr {
+  border: none;
+  border-top: 1px solid rgba(244, 241, 236, 0.16);
+  margin: 3em 0;
+}
+
+/* Navigation article précédent/suivant */
+.ge-article-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: clamp(48px, 6vh, 80px);
+  padding-top: 32px;
+  border-top: 1px solid rgba(244, 241, 236, 0.14);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ge-article-nav__link {
+  color: rgba(244, 241, 236, 0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+  max-width: 45%;
+}
+
+.ge-article-nav__link:hover { color: #f4f1ec; }
+.ge-article-nav__link--next { text-align: right; margin-left: auto; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   COMPATIBILITÉ WPBAKERY
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Reset WPBakery pour le fond sombre */
+.ge-page__content .vc_row,
+.ge-page__content .wpb_column,
+.ge-page__content .vc_column_container,
+.ge-page__content .wpb_wrapper,
+.ge-page__content .wpb_content_element {
+  background-color: transparent;
+  color: inherit;
+}
+
+/* Grille WPBakery — pleine largeur */
+.ge-page .vc_row-fluid,
+.ge-page .vc_row {
+  max-width: none;
+  width: 100%;
+}
+
+/* Espacement colonnes */
+.ge-page .wpb_column { padding: 0 12px; }
+.ge-page .vc_row    { margin: 0 -12px; }
+
+/* Titres dans les éléments WPBakery */
+.ge-page .wpb_content_element h2,
+.ge-page .wpb_content_element h3 {
+  color: #f4f1ec;
+}
+
+/* Boutons WPBakery style thème */
+.ge-page .vc_btn3 {
+  font-family: "JetBrains Mono", ui-monospace, monospace !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+}
+
+.ge-page .vc_btn3.vc_btn3-color-black,
+.ge-page .vc_btn3.vc_btn3-style-flat {
+  background: transparent !important;
+  border: 1px solid #f4f1ec !important;
+  color: #f4f1ec !important;
+}
+
+.ge-page .vc_btn3.vc_btn3-color-black:hover,
+.ge-page .vc_btn3.vc_btn3-style-flat:hover {
+  background: #f4f1ec !important;
+  color: #0a0a0a !important;
+}
+
+/* Séparateur WPBakery */
+.ge-page .vc_separator .vc_sep_line {
+  border-color: rgba(244, 241, 236, 0.20) !important;
+}
+
+/* Images WPBakery */
+.ge-page .wpb_single_image img {
+  filter: grayscale(0.2);
+}
+
+/* Section "full width" WPBakery */
+.ge-page .vc_row.vc_row-no-padding { padding: 0; }
+
+/* Texte WPBakery */
+.ge-page .wpb_text_column {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(244, 241, 236, 0.85);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   RESPONSIVE — stack single column on mobile
+   ───────────────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .ge-hero-stage-grid {
     grid-template-columns: 1fr !important;

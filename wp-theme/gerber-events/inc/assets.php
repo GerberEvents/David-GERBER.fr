@@ -18,48 +18,50 @@ function ge_enqueue_assets() {
     wp_enqueue_style('ge-main',  $uri . '/assets/css/main.css', ['ge-google-fonts'], $ver);
     wp_enqueue_style('ge-theme', get_stylesheet_uri(), ['ge-main'], $ver);
 
-    // React 18 + Babel standalone — chargés dans le footer pour ne pas
-    // bloquer le rendu HTML (le #ge-root monte après DOMContentLoaded)
-    wp_register_script('ge-react',
-        'https://unpkg.com/react@18.3.1/umd/react.production.min.js',
-        [], null, true
-    );
-    wp_register_script('ge-react-dom',
-        'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js',
-        ['ge-react'], null, true
-    );
-    wp_register_script('ge-babel',
-        'https://unpkg.com/@babel/standalone@7.29.0/babel.min.js',
-        [], null, true
-    );
-
-    wp_enqueue_script('ge-react');
-    wp_enqueue_script('ge-react-dom');
-    wp_enqueue_script('ge-babel');
-
-    // Injection de window.GERBER_DATA avant les JSX (footer, après babel)
-    wp_register_script('ge-data', false, ['ge-babel', 'ge-react-dom'], $ver, true);
-    wp_enqueue_script('ge-data');
-    wp_add_inline_script('ge-data',
-        'window.GERBER_DATA = ' . wp_json_encode(
-            ge_collect_data(),
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-        ) . ';'
-    );
-
-    // Fichiers JSX — dans le footer, après GERBER_DATA
-    foreach ([
-        'ge-helpers'   => 'assets/jsx/helpers.jsx',
-        'ge-editorial' => 'assets/jsx/direction-editorial.jsx',
-        'ge-app'       => 'assets/jsx/app.jsx',
-    ] as $handle => $rel) {
-        wp_enqueue_script(
-            $handle,
-            $uri . '/' . $rel,
-            ['ge-data'],
-            $ver,
-            true
+    // React + JSX uniquement sur la page d'accueil (front-page.php).
+    // Les autres pages (WPBakery, articles) n'en ont pas besoin.
+    if (is_front_page()) {
+        wp_register_script('ge-react',
+            'https://unpkg.com/react@18.3.1/umd/react.production.min.js',
+            [], null, true
         );
+        wp_register_script('ge-react-dom',
+            'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js',
+            ['ge-react'], null, true
+        );
+        wp_register_script('ge-babel',
+            'https://unpkg.com/@babel/standalone@7.29.0/babel.min.js',
+            [], null, true
+        );
+
+        wp_enqueue_script('ge-react');
+        wp_enqueue_script('ge-react-dom');
+        wp_enqueue_script('ge-babel');
+
+        // Injection de window.GERBER_DATA avant les JSX (footer, après babel)
+        wp_register_script('ge-data', false, ['ge-babel', 'ge-react-dom'], $ver, true);
+        wp_enqueue_script('ge-data');
+        wp_add_inline_script('ge-data',
+            'window.GERBER_DATA = ' . wp_json_encode(
+                ge_collect_data(),
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+            ) . ';'
+        );
+
+        // Fichiers JSX — dans le footer, après GERBER_DATA
+        foreach ([
+            'ge-helpers'   => 'assets/jsx/helpers.jsx',
+            'ge-editorial' => 'assets/jsx/direction-editorial.jsx',
+            'ge-app'       => 'assets/jsx/app.jsx',
+        ] as $handle => $rel) {
+            wp_enqueue_script(
+                $handle,
+                $uri . '/' . $rel,
+                ['ge-data'],
+                $ver,
+                true
+            );
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'ge_enqueue_assets');
