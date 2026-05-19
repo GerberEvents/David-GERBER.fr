@@ -50,9 +50,9 @@ function ge_enqueue_assets() {
 
         // Fichiers JSX — dans le footer, après GERBER_DATA
         foreach ([
-            'ge-helpers'   => 'assets/jsx/helpers.jsx',
-            'ge-editorial' => 'assets/jsx/direction-editorial.jsx',
-            'ge-app'       => 'assets/jsx/app.jsx',
+            'ge-helpers'   => 'assets/jsx/helpers.js',
+            'ge-editorial' => 'assets/jsx/direction-editorial.js',
+            'ge-app'       => 'assets/jsx/app.js',
         ] as $handle => $rel) {
             wp_enqueue_script(
                 $handle,
@@ -73,9 +73,11 @@ add_action('wp_enqueue_scripts', 'ge_enqueue_assets');
 function ge_babel_script_type($tag, $handle, $src) {
     static $jsx_handles = ['ge-helpers', 'ge-editorial', 'ge-app'];
     if (!in_array($handle, $jsx_handles, true)) return $tag;
+    // Remove any existing type attribute before injecting type="text/babel"
+    $tag = preg_replace('/\s+type=["\'][^"\']*["\']/i', '', $tag, 1);
     return preg_replace(
         '/(<script\b[^>]*)\bsrc=/i',
-        '$1type="text/babel" data-presets="react" src=',
+        '$1 type="text/babel" data-presets="react" src=',
         $tag,
         1
     );

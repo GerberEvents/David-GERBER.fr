@@ -11,12 +11,12 @@ if (!defined('ABSPATH')) exit;
 function ge_collect_data() {
     return [
         'hero' => [
-            'eyebrow'  => ge_opt('ge_hero_eyebrow'),
-            'quote'    => ge_opt('ge_hero_quote'),
-            'script'   => ge_opt('ge_hero_script'),
-            'body'     => ge_opt('ge_hero_body'),
-            'projects' => ge_opt('ge_hero_projects'),
-            'bg'       => ge_opt('ge_hero_bg'),
+            'eyebrow'  => ge_opt('ge_hero_eyebrow')  ?: 'Dossier I · Manifeste · Édition MMXXVI',
+            'quote'    => ge_opt('ge_hero_quote')    ?: 'Concevoir, créer, casser les codes.',
+            'script'   => ge_opt('ge_hero_script')   ?: 'backstage mindset.',
+            'body'     => ge_opt('ge_hero_body')     ?: 'David Gerber dessine, code, construit et met en lumière — souvent dans le même projet.',
+            'projects' => ge_opt('ge_hero_projects') ?: '142+',
+            'bg'       => ge_opt('ge_hero_bg')       ?: get_template_directory_uri() . '/assets/img/bg-alley-lamps.png',
             'lockup'   => [
                 'line1'  => 'GERBER',
                 'line2'  => 'EVENTS',
@@ -25,29 +25,29 @@ function ge_collect_data() {
         ],
 
         'manifesto' => [
-            'quoteA'   => ge_opt('ge_manifesto_quote_a'),
-            'quoteB'   => ge_opt('ge_manifesto_quote_b'),
-            'script'   => ge_opt('ge_manifesto_script'),
-            'footnote' => ge_opt('ge_manifesto_footnote'),
+            'quoteA'   => ge_opt('ge_manifesto_quote_a') ?: 'L\'image sans la technique, c\'est de la décoration.',
+            'quoteB'   => ge_opt('ge_manifesto_quote_b') ?: 'La technique sans l\'image, c\'est de l\'artisanat.',
+            'script'   => ge_opt('ge_manifesto_script')  ?: 'les deux ensemble — c\'est Gerber.',
+            'footnote' => ge_opt('ge_manifesto_footnote') ?: 'Fondé en 1983 · Lyon, France',
         ],
 
         'marquee' => array_values(array_filter(array_map('trim',
-            explode(',', ge_opt('ge_marquee_tokens'))))),
+            explode(',', ge_opt('ge_marquee_tokens') ?: 'SON · LUMIÈRE · SCÉNOGRAPHIE · UX DESIGN · WEB · RÉNOVATION · PRODUCTION · IDENTITÉ · RÉGIE · 1983')))),
 
         'disciplinesHeader' => [
-            'eyebrow' => ge_opt('ge_disc_eyebrow'),
-            'title'   => ge_opt('ge_disc_title'),
+            'eyebrow' => ge_opt('ge_disc_eyebrow') ?: 'Champs d\'intervention',
+            'title'   => ge_opt('ge_disc_title')   ?: 'Quatre disciplines,\nune seule exigence.',
         ],
 
         'disciplines' => ge_get_disciplines(),
         'stills'      => ge_get_stills(),
 
         'contact' => [
-            'email'   => ge_opt('ge_contact_email'),
-            'phone'   => ge_opt('ge_contact_phone'),
-            'address' => ge_opt('ge_contact_address'),
-            'cta'     => ge_opt('ge_contact_cta'),
-            'script'  => ge_opt('ge_contact_script'),
+            'email'   => ge_opt('ge_contact_email')   ?: 'contact@david-gerber.fr',
+            'phone'   => ge_opt('ge_contact_phone')   ?: '+33 (0)6 00 00 00 00',
+            'address' => ge_opt('ge_contact_address') ?: 'Lyon, France',
+            'cta'     => ge_opt('ge_contact_cta')     ?: 'Démarrer un brief',
+            'script'  => ge_opt('ge_contact_script')  ?: 'parlons-en.',
         ],
 
         'nav' => ge_get_nav_items('primary'),
