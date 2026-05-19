@@ -1,0 +1,19 @@
+/*
+Theme Name: GERBER EVENTS
+Theme URI: https://david-gerber.fr
+Author: GERBER EVENTS
+Author URI: https://david-gerber.fr
+Description: Thème noir cinématographique pour GERBER EVENTS — atelier pluridisciplinaire depuis 1983. Hero avec curseur révélateur, planche-contact, manifeste centré, disciplines en ligne, footer brief direct.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: gerber-events
+Tags: dark, one-column, custom-colors, custom-logo, custom-menu, editor-style, featured-images, full-width-template, theme-options
+*/
+
+/* The real styles live in assets/css/main.css — this file only carries the
+   WordPress theme header so WP recognises the theme. main.css is enqueued
+   from functions.php. */

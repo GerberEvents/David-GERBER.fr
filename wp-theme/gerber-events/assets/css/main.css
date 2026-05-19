@@ -1,0 +1,128 @@
+/* GERBER EVENTS — main stylesheet */
+
+@font-face {
+  font-family: "Kanilia";
+  src: url("../fonts/Kanilia-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #f4f1ec;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ge-body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  overflow-x: hidden;
+}
+
+/* WordPress admin bar compensation */
+.admin-bar .ge-mount { padding-top: 0; }
+
+.ge-mount {
+  min-height: 100vh;
+}
+
+.ge-root,
+.ge-root * { box-sizing: border-box; }
+
+.ge-root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  --ge-ease: cubic-bezier(.2,.7,.2,1);
+}
+
+.ge-num { font-variant-numeric: tabular-nums; }
+
+/* Keyframes */
+@keyframes ge-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ge-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ge-mask-in {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes ge-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes a-blink {
+  0%,80% { opacity: 1; }
+  90%,100% { opacity: 0; }
+}
+@keyframes ge-grain {
+  0%   { transform: translate(0,0); }
+  100% { transform: translate(-12%, 8%); }
+}
+
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background-image: radial-gradient(rgba(255,255,255,.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  opacity: .35;
+  pointer-events: none;
+  animation: ge-grain 8s steps(8) infinite alternate;
+}
+
+.ge-root[data-mode="light"] .grain::before {
+  background-image: radial-gradient(rgba(0,0,0,.08) 0.5px, transparent 0.5px);
+  mix-blend-mode: multiply;
+}
+
+.ge-scroll-hint {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .6;
+}
+
+/* Responsive — stack single column on mobile */
+@media (max-width: 767px) {
+  .ge-hero-stage-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ge-hero-sidebar {
+    display: none !important;
+  }
+  .ge-disciplines-header {
+    grid-template-columns: 1fr !important;
+  }
+  .ge-disciplines-header > *:last-child {
+    display: none !important;
+  }
+  .ge-contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .ge-filmroll-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .ge-discipline-row {
+    grid-template-columns: 60px 72px 1fr !important;
+  }
+  .ge-discipline-row > *:nth-child(5),
+  .ge-discipline-row > *:nth-child(6) {
+    display: none !important;
+  }
+}
