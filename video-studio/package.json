@@ -1,0 +1,31 @@
+{
+  "name": "video-studio",
+  "version": "1.0.0",
+  "description": "Remotion video studio — SadTalker output → branded 9:16 social video",
+  "main": "src/index.ts",
+  "remotion": {
+    "entryPoint": "src/index.ts"
+  },
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:fullhd": "remotion render src/index.ts TalkingHead_FullHD out/TalkingHead_FullHD.mp4",
+    "render:hd": "remotion render src/index.ts TalkingHead_HD out/TalkingHead_HD.mp4",
+    "render:square": "remotion render src/index.ts TalkingHead_Square out/TalkingHead_Square.mp4",
+    "render:all": "npm run render:fullhd && npm run render:hd && npm run render:square"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.465",
+    "@remotion/media-utils": "^4.0.465",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "remotion": "^4.0.465"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}
