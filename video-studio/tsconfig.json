@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "es2017"],
+    "jsx": "react",
+    "target": "ES2017",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
